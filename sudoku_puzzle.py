@@ -211,9 +211,20 @@ class SudokuPuzzle(Puzzle):
         >>> s.fail_fast()
         True
         """
-
+        fail = False
+        # Get all the extensions
+        extensions_lst = self.extensions()
+        # Check for a single * in the list of extensions
+        for extension in extensions_lst:
+            for row_num in range (1,self._n+1):
+                row = self._row_set(row_num)
+                if '*' in row:
+                    fail = True
+        return fail
+        # If single * found then return True
+        # else False
         # TODO: Complete this method
-        pass
+
     
     # some helper methods
     def _row_set(self, r):
@@ -291,7 +302,7 @@ if __name__ == "__main__":
           "{} seconds\n".format(end - start))
     print(sol)
 
-    """
+    '''
     s = SudokuPuzzle(9,
                      [["*", "*", "*", "9", "*", "2", "*", "*", "*"],
                       ["*", "9", "1", "*", "*", "*", "6", "3", "*"],
@@ -339,4 +350,4 @@ if __name__ == "__main__":
     print("time to solve 9x9 using depth_first: {} seconds\n".format(
         end - start))
     print(sol)
-    """
+    '''
