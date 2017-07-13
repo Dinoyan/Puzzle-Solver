@@ -32,10 +32,16 @@ class GridPegSolitairePuzzle(Puzzle):
     # override extensions
     # legal extensions consist of all configurations that can be reached by
     # making a single jump from this configuration
-
+    def extensions(self):
+        pass
+    
+    
     # TODO
     # override is_solved
     # A configuration is solved when there is exactly one "*" left
+    def is_solved(self):
+        ''' Return True if the puzzle is solved, else False
+        '''
 
 
 if __name__ == "__main__":

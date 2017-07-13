@@ -33,10 +33,14 @@ class MNPuzzle(Puzzle):
     # override extensions
     # legal extensions are configurations that can be reached by swapping one
     # symbol to the left, right, above, or below "*" with "*"
+    def extensions(self):
+        pass
 
     # TODO
     # override is_solved
     # a configuration is solved when from_grid is the same as to_grid
+    def is_solved(self):
+        pass
 
 
 if __name__ == "__main__":
