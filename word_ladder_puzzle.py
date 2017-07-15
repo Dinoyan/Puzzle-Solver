@@ -22,25 +22,25 @@ class WordLadderPuzzle(Puzzle):
         # set of characters to use for 1-character changes
         self._chars = "abcdefghijklmnopqrstuvwxyz"
 
-        # TODO
-        # implement __eq__ and __str__
-        # __repr__ is up to you
-        def __eq__(self, other):
-            return self._from_word == other
+     # TODO
+     # implement __eq__ and __str__
+     # __repr__ is up to you
+    def __eq__(self, other):
+        return self._from_word == other
         
-        def __str__(self):
-            ret = 'From Word: ' + self._from_word 'to_word: ' self._to_word
-            return ret
+    def __str__(self):
+        ret = 'From Word: ' + self._from_word 'to_word: ' self._to_word
+        return ret
 
-        # TODO
-        # override extensions
-        # legal extensions are WordLadderPuzzles that have a from_word that can
-        # be reached from this one by changing a single letter to one of those
-        # in self._chars
-        def extensions(self):
-            # Create an empty list to store the extensions.
-            extensions_lst = []
-            # Counter var to keep track of the char index.
+    # TODO
+    # override extensions
+    # legal extensions are WordLadderPuzzles that have a from_word that can
+    # be reached from this one by changing a single letter to one of those
+    # in self._chars
+    def extensions(self):
+        # Create an empty list to store the extensions.
+        extensions_lst = []
+        # Counter var to keep track of the char index.
             char_index = 0
             # Loop through the self._from_word.
             for char in self._from_word:
