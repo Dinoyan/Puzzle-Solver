@@ -25,6 +25,12 @@ class WordLadderPuzzle(Puzzle):
         # TODO
         # implement __eq__ and __str__
         # __repr__ is up to you
+        def __eq__(self, other):
+            return self._from_word == other
+        
+        def __str__(self):
+            ret = 'From Word: ' + self._from_word 'to_word: ' self._to_word
+            return ret
 
         # TODO
         # override extensions
