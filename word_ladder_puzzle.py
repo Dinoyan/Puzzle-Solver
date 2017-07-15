@@ -32,6 +32,7 @@ class WordLadderPuzzle(Puzzle):
         # be reached from this one by changing a single letter to one of those
         # in self._chars
         def extensions(self):
+            word_len = len(from_word)
             pass
 
         # TODO
