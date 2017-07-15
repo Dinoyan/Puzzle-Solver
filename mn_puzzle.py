@@ -40,8 +40,11 @@ class MNPuzzle(Puzzle):
     # override is_solved
     # a configuration is solved when from_grid is the same as to_grid
     def is_solved(self):
-        pass
-
+        grid_counter = 0
+        is_solved = True
+        for sub_grid in self.from_grid:
+            if sub_grid != self.to_grid[grid_counter]:
+                is_solved = False
 
 if __name__ == "__main__":
     import doctest
