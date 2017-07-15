@@ -38,8 +38,20 @@ class WordLadderPuzzle(Puzzle):
         # be reached from this one by changing a single letter to one of those
         # in self._chars
         def extensions(self):
-            word_len = len(from_word)
-            pass
+            # Create an empty list to store the extensions.
+            extensions_lst = []
+            # Counter var to keep track of the char index.
+            char_index = 0
+            # Loop through the self._from_word.
+            for char in self._from_word:
+                # Loop through the self._chars.
+                for alpha in self._chars:
+                    # Get the new extension word
+                    new_extension = self._from_word[:char_index] + alpha + self._from_word[char_index + 1:]
+                    # Check if the new extension word is in the word set.
+                    if new_extension in self._word_set:
+                        # Add the word to the extension list
+                        extensions_lst.append(new_extension)
 
         # TODO
         # override is_solved
