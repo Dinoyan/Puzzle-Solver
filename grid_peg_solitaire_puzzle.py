@@ -42,6 +42,22 @@ class GridPegSolitairePuzzle(Puzzle):
     def is_solved(self):
         ''' Return True if the puzzle is solved, else False
         '''
+        # Set is_solved to True.
+        is_solved = True
+        # num_peg var to keep count of the pegs on the grid.
+        num_peg = 0
+        # Loop through the grid.
+        for row in self._marker:
+            # Check for *.
+            if '*' in row:
+                # Increment the num_peg by 1
+                num_peg += 1
+        # Check if the num_peg is greater than 1.
+        if num_peg > 1:
+            # Set is_solved to False.
+            is_solved = False
+        # Return is_solved bool. 
+        return is_solved
 
 
 if __name__ == "__main__":
