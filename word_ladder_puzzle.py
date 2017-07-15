@@ -45,6 +45,8 @@ class WordLadderPuzzle(Puzzle):
         # override is_solved
         # this WordLadderPuzzle is solved when _from_word is the same as
         # _to_word
+        def is_solved(self):
+            return self._from_word == self._to_word
 
 
 if __name__ == '__main__':
