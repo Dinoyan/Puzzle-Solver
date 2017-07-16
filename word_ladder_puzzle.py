@@ -21,11 +21,12 @@ class WordLadderPuzzle(Puzzle):
         # set of characters to use for 1-character changes
         self._chars = "abcdefghijklmnopqrstuvwxyz"
 
-        # TODO
-        # implement __eq__ and __str__
-        # __repr__ is up to you
+    # TODO
+    # implement __eq__ and __str__
+    # __repr__ is up to you
     def __eq__(self, other):
-        return self._from_word == other
+        return ((self.from_word == other._from_word) and (self._to_word == 
+                other._to_word) and (self._word_set == other._word_set))
     
     def __str__(self):
         ret = 'From Word: ' + self._from_word + 'to_word: ' + self._to_word
