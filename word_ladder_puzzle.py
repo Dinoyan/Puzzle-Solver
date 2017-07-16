@@ -22,14 +22,14 @@ class WordLadderPuzzle(Puzzle):
         # set of characters to use for 1-character changes
         self._chars = "abcdefghijklmnopqrstuvwxyz"
 
-     # TODO
-     # implement __eq__ and __str__
-     # __repr__ is up to you
+        # TODO
+        # implement __eq__ and __str__
+        # __repr__ is up to you
     def __eq__(self, other):
         return self._from_word == other
-        
+    
     def __str__(self):
-        ret = 'From Word: ' + self._from_word 'to_word: ' self._to_word
+        ret = 'From Word: ' + self._from_word + 'to_word: ' + self._to_word
         return ret
 
     # TODO
@@ -41,24 +41,24 @@ class WordLadderPuzzle(Puzzle):
         # Create an empty list to store the extensions.
         extensions_lst = []
         # Counter var to keep track of the char index.
-            char_index = 0
-            # Loop through the self._from_word.
-            for char in self._from_word:
-                # Loop through the self._chars.
-                for alpha in self._chars:
-                    # Get the new extension word
-                    new_extension = self._from_word[:char_index] + alpha + self._from_word[char_index + 1:]
-                    # Check if the new extension word is in the word set.
-                    if new_extension in self._word_set:
-                        # Add the word to the extension list
-                        extensions_lst.append(new_extension)
+        char_index = 0
+        # Loop through the self._from_word.
+        for char in self._from_word:
+            # Loop through the self._chars.
+            for alpha in self._chars:
+                # Get the new extension word
+                new_extension = self._from_word[:char_index] + alpha + self._from_word[char_index + 1:]
+                # Check if the new extension word is in the word set.
+                if new_extension in self._word_set:
+                    # Add the word to the extension list
+                    extensions_lst.append(new_extension)
 
-        # TODO
-        # override is_solved
-        # this WordLadderPuzzle is solved when _from_word is the same as
-        # _to_word
-        def is_solved(self):
-            return self._from_word == self._to_word
+    # TODO
+    # override is_solved
+    # this WordLadderPuzzle is solved when _from_word is the same as
+    # _to_word
+    def is_solved(self):
+        return self._from_word == self._to_word
 
 
 if __name__ == '__main__':
