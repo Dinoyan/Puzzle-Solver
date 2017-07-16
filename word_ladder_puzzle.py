@@ -1,6 +1,5 @@
 from puzzle import Puzzle
 
-
 class WordLadderPuzzle(Puzzle):
     """
     A word-ladder puzzle that may be solved, unsolved, or even unsolvable.
