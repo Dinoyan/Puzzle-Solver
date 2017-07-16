@@ -27,6 +27,22 @@ class MNPuzzle(Puzzle):
 
     # TODO
     # implement __eq__ and __str__
+    def __eq__(self, other):
+        row_num = 0
+        eq = True
+        for row in sel.from_grid:
+            if other[row_num] != row:
+                eq = False
+                row_num += 1
+        return eq
+            
+    def __str__(self):
+        print('From Grid:')
+        for row in self.from_grid:
+            print(row)
+        print('To Grid:')
+        for row in self.to_grid:
+            print(row)
     # __repr__ is up to you
 
     # TODO
@@ -55,6 +71,11 @@ if __name__ == "__main__":
     from time import time
     start = time()
     solution = breadth_first_solve(MNPuzzle(start_grid, target_grid))
+    
+    # __str__ method tester
+    print(MNPuzzle(start_grid, target_grid))
+    
+    
     end = time()
     print("BFS solved: \n\n{} \n\nin {} seconds".format(
         solution, end - start))
