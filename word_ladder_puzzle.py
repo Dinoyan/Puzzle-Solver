@@ -1,4 +1,5 @@
 from puzzle import Puzzle
+import codecs
 
 class WordLadderPuzzle(Puzzle):
     """
@@ -29,11 +30,11 @@ class WordLadderPuzzle(Puzzle):
                 other._to_word) and (self._word_set == other._word_set))
     
     def __str__(self):
-        ret = 'From Word: ' + self._from_word + 'to_word: ' + self._to_word
+        ret = 'From Word: ' + str(self._from_word) + 'to_word: ' + str(self._to_word)
         return ret
 
     # TODO
-    # override extensions
+    # override extensions: DONE
     # legal extensions are WordLadderPuzzles that have a from_word that can
     # be reached from this one by changing a single letter to one of those
     # in self._chars
@@ -52,9 +53,10 @@ class WordLadderPuzzle(Puzzle):
                 if new_extension in self._word_set:
                     # Add the word to the extension list
                     extensions_lst.append(new_extension)
+        return extensions_lst
 
     # TODO
-    # override is_solved
+    # override is_solved: DONE
     # this WordLadderPuzzle is solved when _from_word is the same as
     # _to_word
     def is_solved(self):
@@ -66,7 +68,7 @@ if __name__ == '__main__':
     doctest.testmod()
     from puzzle_tools import breadth_first_solve, depth_first_solve
     from time import time
-    with open("words", "r") as words:
+    with codecs.open("words", "r", 'utf-8') as words:
         word_set = set(words.read().split())
     w = WordLadderPuzzle("same", "cost", word_set)
     start = time()
