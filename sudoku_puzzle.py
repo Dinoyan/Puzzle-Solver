@@ -190,7 +190,7 @@ class SudokuPuzzle(Puzzle):
     # other words, if there is one open position where the symbols already used
     # in the same row, column, and subsquare exhaust the symbols available,
     # there is no point in continuing.
-    def fail_fast(self):
+    '''def fail_fast(self):
         """
         Return whether some unfilled position has no allowable symbols
         remaining to choose from, and hence this SudokoPuzzle can never
@@ -225,7 +225,7 @@ class SudokuPuzzle(Puzzle):
         # else False
         # TODO: Complete this method
 
-    
+    '''
     # some helper methods
     def _row_set(self, r):
         #
