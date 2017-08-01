@@ -37,12 +37,16 @@ class MNPuzzle(Puzzle):
         return eq
             
     def __str__(self):
-        print('From Grid:')
+        '''(self) -> str
+        Returns the 
+        '''
+        print ('From Grid:')
         for row in self.from_grid:
-            print(row)
+            return str(row)
         print('To Grid:')
         for row in self.to_grid:
-            print(row)
+            return str(row)
+        
     # __repr__ is up to you
 
     # TODO
@@ -50,6 +54,8 @@ class MNPuzzle(Puzzle):
     # legal extensions are configurations that can be reached by swapping one
     # symbol to the left, right, above, or below "*" with "*"
     def extensions(self):
+        '''(self) -> list
+        '''
         pass
 
     # TODO
