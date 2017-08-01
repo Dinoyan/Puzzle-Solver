@@ -30,7 +30,7 @@ class WordLadderPuzzle(Puzzle):
                 other._to_word) and (self._word_set == other._word_set))
     
     def __str__(self):
-        ret = 'From Word: ' + str(self._from_word) + 'to_word: ' + str(self._to_word)
+        ret = 'From Word: ' + str(self._from_word) + ' to_word: ' + str(self._to_word)
         return ret
 
     # TODO
@@ -60,6 +60,14 @@ class WordLadderPuzzle(Puzzle):
     # this WordLadderPuzzle is solved when _from_word is the same as
     # _to_word
     def is_solved(self):
+        '''(self) -> bool
+        >>> puzzle1 = WordLadderPuzzle('dinoyan', 'dinoyan', {'dino', 'dinoyan'})
+        >>> puzzle1.is_solved()
+        True
+        >>> puzzle2 = WordLadderPuzzle('dinoyan', 'dino', {'dino', 'dinoyan'})
+        >>> puzzle2.is_solved()
+        False
+        '''
         return self._from_word == self._to_word
 
 
