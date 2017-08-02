@@ -190,7 +190,7 @@ class SudokuPuzzle(Puzzle):
     # other words, if there is one open position where the symbols already used
     # in the same row, column, and subsquare exhaust the symbols available,
     # there is no point in continuing.
-    '''def fail_fast(self):
+    def fail_fast(self):
         """
         Return whether some unfilled position has no allowable symbols
         remaining to choose from, and hence this SudokoPuzzle can never
@@ -211,21 +211,20 @@ class SudokuPuzzle(Puzzle):
         >>> s.fail_fast()
         True
         """
-        fail = False
-        # Get all the extensions
-        extensions_lst = self.extensions()
-        # Check for a single * in the list of extensions
-        for extension in extensions_lst:
-            for row_num in range (1,self._n+1):
-                row = self._row_set(row_num)
-                if '*' in row:
-                    fail = True
-        return fail
+        allowed_symbols = self.symbol_set
+        for symbol in range(len(allowed_symbols)):
+                    if allowed_symbols[symbol] == "*":
+                        if all([x in (self._row_set(symbol) |
+                                      self._column_set(symbol) |
+                                      self._subsquare_set(i))
+                                for x in self._symbol_set]):
+                            return True
+        return False
         # If single * found then return True
         # else False
         # TODO: Complete this method
 
-    '''
+
     # some helper methods
     def _row_set(self, r):
         #
