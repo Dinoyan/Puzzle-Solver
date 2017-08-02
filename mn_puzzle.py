@@ -40,12 +40,13 @@ class MNPuzzle(Puzzle):
         '''(self) -> str
         Returns the 
         '''
-        print ('From Grid:')
+        from_grid = ''
         for row in self.from_grid:
-            return str(row)
-        print('To Grid:')
+            from_grid += str(row) 
+        to_grid = ''
         for row in self.to_grid:
-            return str(row)
+            to_grid += str(row) 
+        return from_grid.split + \n +  to_grid
         
     # __repr__ is up to you
 
