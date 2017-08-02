@@ -50,7 +50,8 @@ class WordLadderPuzzle(Puzzle):
                 # Get the new extension word
                 new_extension = self._from_word[:char_index] + alpha + self._from_word[char_index + 1:]
                 # Check if the new extension word is in the word set.
-                if new_extension in self._word_set:
+                if ((new_extension in self._word_set) and 
+                    (new_extension not in extensions_lst)):
                     # Add the word to the extension list
                     extensions_lst.append(new_extension)
         return extensions_lst
