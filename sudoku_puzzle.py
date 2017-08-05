@@ -211,20 +211,21 @@ class SudokuPuzzle(Puzzle):
         >>> s.fail_fast()
         True
         """
-        allowed_symbols = self.symbol_set
-        for symbol in range(len(allowed_symbols)):
-                    if allowed_symbols[symbol] == "*":
-                        if all([x in (self._row_set(symbol) |
-                                      self._column_set(symbol) |
-                                      self._subsquare_set(i))
-                                for x in self._symbol_set]):
-                            return True
-        return False
-        # If single * found then return True
-        # else False
-        # TODO: Complete this method
-
-
+        symbols, symbol_set, n = self._symbols, self._symbol_set, self._n
+        r = 0 # row with first empty position
+        while "*" not in symbols[r]:
+            r += 1
+        c = symbols[r].index("*") # column with first empty position
+       
+        set_union = (self._symbol_set |
+                           (self._row_set(r) |
+                            self._column_set(c) |
+                            self._subsquare_set(r, c)))
+        print(set_union)
+        if symbol_set.issubset(set_union):            
+            return True
+        else:
+            return False
     # some helper methods
     def _row_set(self, r):
         #
@@ -287,7 +288,7 @@ if __name__ == "__main__":
                      {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
     
     print(s.fail_fast())
-
+'''
     from time import time
 
     print("solving sudoku from July 9 2015 Star... \n\n{}\n\n".format(s))
@@ -303,7 +304,7 @@ if __name__ == "__main__":
           "{} seconds\n".format(end - start))
     print(sol)
 
-    '''
+    
     s = SudokuPuzzle(9,
                      [["*", "*", "*", "9", "*", "2", "*", "*", "*"],
                       ["*", "9", "1", "*", "*", "*", "6", "3", "*"],
@@ -351,4 +352,5 @@ if __name__ == "__main__":
     print("time to solve 9x9 using depth_first: {} seconds\n".format(
         end - start))
     print(sol)
-    '''
+    
+'''
