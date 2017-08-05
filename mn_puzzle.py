@@ -30,7 +30,7 @@ class MNPuzzle(Puzzle):
     def __eq__(self, other):
         row_num = 0
         eq = True
-        for row in sel.from_grid:
+        for row in self.from_grid:
             if other[row_num] != row:
                 eq = False
                 row_num += 1
@@ -42,11 +42,11 @@ class MNPuzzle(Puzzle):
         '''
         from_grid = ''
         for row in self.from_grid:
-            from_grid += str(row) 
+            from_grid += str(row) + '\n'
         to_grid = ''
         for row in self.to_grid:
-            to_grid += str(row) 
-        return from_grid.split + \n +  to_grid
+            to_grid += str(row)  + '\n'
+        return "From Grid:" +'\n' + from_grid + '\n' +  'To Grid' + '\n' + to_grid
         
     # __repr__ is up to you
 
