@@ -53,28 +53,48 @@ class MNPuzzle(Puzzle):
     def extensions(self):
         '''(self) -> list
         '''
-        estensions = []
+        extensions = []
         coor = self.get_space_coor()
         row, column = coor[0], coor[1]
+        print('fefewfefwefefefwf' + str(column))
+        print(self.m)
+        print(self.n)
         # Down move
         if row + 1 < self.n:
             grid_copy = deepcopy(self.from_grid)
-            lst_grid = convert_to_lst(grid_copy)
+            lst_grid = self.convert_to_lst(grid_copy)
             value = lst_grid[row + 1][column]
             lst_grid[row + 1][column] = '*'
             lst_grid[row][column] = value
-            extensions.append(MNPuzzle(convert_to_tuple(lst_grid), target_grid))            
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))    
 
         # Up move
-        elif row + 1 > self.n:
+        if row + 1 > self.n:
             grid_copy = deepcopy(self.from_grid)
-            lst_grid = convert_to_lst(grid_copy)
-            
-        
-        # Left Move
-        
-        # Right move
-        
+            lst_grid = self.convert_to_lst(grid_copy)
+            value = lst_grid[row - 1][column]
+            lst_grid[row - 1][column] = '*'
+            lst_grid[row][column] = value
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))                    
+
+        # Right Move
+        if column + 1 < self.m:
+            grid_copy = deepcopy(self.from_grid)
+            lst_grid = self.convert_to_lst(grid_copy)
+            value = lst_grid[row][column + 1]
+            lst_grid[row][column + 1] = '*'
+            lst_grid[row][column] = value
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))
+
+        # Left move
+        if column + 1 > self.m:
+            grid_copy = deepcopy(self.from_grid)
+            lst_grid = self.convert_to_lst(grid_copy)
+            value = lst_grid[row][column - 1]
+            lst_grid[row][column - 11] = '*'
+            lst_grid[row][column] = value
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))              
+        return extensions
     
     def get_space_coor(self):
         '''
