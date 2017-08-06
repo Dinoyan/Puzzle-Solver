@@ -1,5 +1,5 @@
 from puzzle import Puzzle
-
+from copy import deepcopy
 
 class MNPuzzle(Puzzle):
     """
@@ -28,13 +28,9 @@ class MNPuzzle(Puzzle):
     # TODO
     # implement __eq__ and __str__
     def __eq__(self, other):
-        row_num = 0
-        eq = True
-        for row in self.from_grid:
-            if other[row_num] != row:
-                eq = False
-                row_num += 1
-        return eq
+        return (type(other) == type(self) and
+                       self.n == other.n and self.m == other.m and
+                       self.from_grid == other.to_grid)        
             
     def __str__(self):
         '''(self) -> str
@@ -57,17 +53,62 @@ class MNPuzzle(Puzzle):
     def extensions(self):
         '''(self) -> list
         '''
-        pass
+        estensions = []
+        coor = self.get_space_coor()
+        row, column = coor[0], coor[1]
+        # Down move
+        if row + 1 < self.n:
+            grid_copy = deepcopy(self.from_grid)
+            lst_grid = convert_to_lst(grid_copy)
+            value = lst_grid[row + 1][column]
+            lst_grid[row + 1][column] = '*'
+            lst_grid[row][column] = value
+            extensions.append(MNPuzzle(convert_to_tuple(lst_grid), target_grid))            
+
+        # Up move
+        elif row + 1 > self.n:
+            grid_copy = deepcopy(self.from_grid)
+            lst_grid = convert_to_lst(grid_copy)
+            
+        
+        # Left Move
+        
+        # Right move
+        
+    
+    def get_space_coor(self):
+        '''
+        '''
+        row_coor = 0
+        space_coor = 0
+        # Get the coordinate of the empty space '*'
+        for sub_row in self.from_grid:
+            for item in sub_row:
+                if item == '*':
+                    # Create a tuple with the coordinates
+                    empty_coor = (row_coor, space_coor)
+                space_coor += 1
+            row_coor += 1
+            space_coor = 0
+        return empty_coor
+    
+    def convert_to_lst(self, grid):
+        '''
+        '''
+        return list(list(row) for row in grid)
+
+
+    def convert_to_tuple(self, grid):
+        '''
+        '''
+        return tuple(tuple(row) for row in grid)
+    
 
     # TODO
     # override is_solved
     # a configuration is solved when from_grid is the same as to_grid
     def is_solved(self):
-        grid_counter = 0
-        is_solved = True
-        for sub_grid in self.from_grid:
-            if sub_grid != self.to_grid[grid_counter]:
-                is_solved = False
+        return self.from_grid == self.to_grid
 
 if __name__ == "__main__":
     import doctest
