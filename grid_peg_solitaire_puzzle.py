@@ -32,7 +32,10 @@ class GridPegSolitairePuzzle(Puzzle):
                        self._marker == other._marker and self._marker_set == other._marker_set)      
                 
     def __str__(self):
-        pass
+        ret = ''
+        for row in self._marker:
+            ret += str(row) + '\n'
+        return ret
     # __repr__ is up to you
 
     # TODO
@@ -40,57 +43,65 @@ class GridPegSolitairePuzzle(Puzzle):
     # legal extensions consist of all configurations that can be reached by
     # making a single jump from this configuration
     def extensions(self):
-        coor = self.get_empty_space()
-        row, col = coor[0], coor[1]
+        '''(self) -> list of puzzle obj
+         
+        
+        '''
+        empty_space_coor = self.get_empty_space()
         num_row = len(self._marker) - 1
         num_sub_r = len(self._marker[0]) - 1
         extensions, markers = [], self._marker_set
 
-        # UP DIRECTION
-        if row + 2 <= num_row:
-            temp_puzzle = deepcopy(self._marker)
-            if (temp_puzzle[row + 1][col] == '*') and (temp_puzzle[row + 2][col] == '*'):
-                temp_puzzle[row][col] = '*'
-                temp_puzzle[row + 1][col] = '.'
-                temp_puzzle[row + 2][col] = '.'
-                extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))
+        for coor in empty_space_coor:
+            row, col = coor[0], coor[1]
+            # UP DIRECTION
+            if row + 2 <= num_row:
+                temp_puzzle = deepcopy(self._marker)
+                if (temp_puzzle[row + 1][col] == '*') and (temp_puzzle[row + 2][col] == '*'):
+                    temp_puzzle[row][col] = '*'
+                    temp_puzzle[row + 1][col] = '.'
+                    temp_puzzle[row + 2][col] = '.'
+                    extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))
 
-        # DOWN DIRECTION
-        if row - 2 >= 0:
-            temp_puzzle = deepcopy(self._marker)
-            if (temp_puzzle[row - 1][col] == '*') and (temp_puzzle[row - 2][col] == '*'):
-                temp_puzzle[row][col] = '*'
-                temp_puzzle[row - 1][col] = '.'
-                temp_puzzle[row  - 2][col] = '.'
-                extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))      
+            # DOWN DIRECTION
+            if row - 2 >= 0:
+                temp_puzzle = deepcopy(self._marker)
+                if (temp_puzzle[row - 1][col] == '*') and (temp_puzzle[row - 2][col] == '*'):
+                    temp_puzzle[row][col] = '*'
+                    temp_puzzle[row - 1][col] = '.'
+                    temp_puzzle[row  - 2][col] = '.'
+                    extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))      
+    
+            # RIGHT DIRECTION
+            if col + 2 <= num_sub_r:
+                temp_puzzle = deepcopy(self._marker)
+                if (temp_puzzle[row][col + 1] == '*') and (temp_puzzle[row][col + 2] == '*'):
+                    temp_puzzle[row][col] = '*'
+                    temp_puzzle[row][col + 2] = '.'
+                    temp_puzzle[row][col + 1] = '.'
+                    extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))                    
 
-        # RIGHT DIRECTION
-        if col + 2 <= num_sub_r:
-            temp_puzzle = deepcopy(self._marker)
-            if (temp_puzzle[row][col + 1] == '*') and (temp_puzzle[row][col + 2] == '*'):
-                temp_puzzle[row][col] = '*'
-                temp_puzzle[row][col + 2] = '.'
-                temp_puzzle[row][col + 1] = '.'
-                extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))                    
-
-        # LEFT DIRECTION
-        if col - 2 >= 0:
-            temp_puzzle = deepcopy(self._marker)
-            if (temp_puzzle[row][col - 1] == '*') and (temp_puzzle[row][col - 2] == '*'):
-                temp_puzzle[row][col] = '*'
-                temp_puzzle[row][col - 2] = '.'
-                temp_puzzle[row][col - 1] = '.'
-                extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))         
+            # LEFT DIRECTION
+            if col - 2 >= 0:
+                temp_puzzle = deepcopy(self._marker)
+                if (temp_puzzle[row][col - 1] == '*') and (temp_puzzle[row][col - 2] == '*'):
+                    temp_puzzle[row][col] = '*'
+                    temp_puzzle[row][col - 2] = '.'
+                    temp_puzzle[row][col - 1] = '.'
+                    extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))         
         return extensions
 
-    
     def get_empty_space(self):
+        '''(self) -> list of tuples
+        Given a puzzle, then returns the coordinates of all the epmty spaces.
+        '''
         row = 0
         col = 0
+        coor = []
         for grid_row in self._marker:
             for sub_row in grid_row:
                 if sub_row == ".":
-                    coor = (row, col)
+                    coor.append((row, col))
                 col += 1
             col = 0
             row += 1
