@@ -42,7 +42,7 @@ class MNPuzzle(Puzzle):
         to_grid = ''
         for row in self.to_grid:
             to_grid += str(row)  + '\n'
-        return "From Grid:" +'\n' + from_grid + '\n' +  'To Grid' + '\n' + to_grid
+        return "From Grid:" + '\n' + from_grid + 'To Grid' + '\n' + to_grid
         
     # __repr__ is up to you
 
@@ -52,52 +52,92 @@ class MNPuzzle(Puzzle):
     # symbol to the left, right, above, or below "*" with "*"
     def extensions(self):
         '''(self) -> list
+        Returns a list with all the legal extensions. Legal extensions are confi
+        gurations that can be reached by swapping one  symbol to the left,
+        right, above, or below "*" with "*"
+
+        >>> start_grid = (("2", "*", "3"), ("1", "4", "5"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> a = MNPuzzle(start_grid, target_grid)
+        >>> l = a.extensions()
+        >>> print(l[0])
+        From Grid:
+        ('2', '4', '3')
+        ('1', '*', '5')
+        To Grid
+        ('1', '2', '3')
+        ('4', '5', '*')
+        <BLANKLINE>
+
+        >>> print(l[2])
+        From Grid:
+        ('*', '2', '3')
+        ('1', '4', '5')
+        To Grid
+        ('1', '2', '3')
+        ('4', '5', '*')
+        <BLANKLINE>
+
+        >>> print(l[1])
+        From Grid:
+        ('2', '3', '*')
+        ('1', '4', '5')
+        To Grid
+        ('1', '2', '3')
+        ('4', '5', '*')
+        <BLANKLINE>
         '''
         extensions = []
         coor = self.get_space_coor()
-        row, column = coor[0], coor[1]
-        print('fefewfefwefefefwf' + str(column))
-        print(self.m)
-        print(self.n)
+        row, column, to_grid = coor[0], coor[1], self.to_grid
         # Down move
-        if row + 1 < self.n:
+        if row + 1 <= self.n:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
+            # Make the moves
             value = lst_grid[row + 1][column]
             lst_grid[row + 1][column] = '*'
             lst_grid[row][column] = value
-            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))    
+            # Create a MNPuzzle instances and append the list
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))    
 
         # Up move
         if row + 1 > self.n:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
+            # Make the moves
             value = lst_grid[row - 1][column]
             lst_grid[row - 1][column] = '*'
             lst_grid[row][column] = value
-            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))                    
+            # Create a MNPuzzle instances and append the list
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))                    
 
         # Right Move
-        if column + 1 < self.m:
+        if column + 1 <= self.m:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
+            # Make the moves
             value = lst_grid[row][column + 1]
             lst_grid[row][column + 1] = '*'
             lst_grid[row][column] = value
-            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))
+            # Create a MNPuzzle instances and append the list
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))
 
         # Left move
-        if column + 1 > self.m:
+        if column - 1 >= 0:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             value = lst_grid[row][column - 1]
-            lst_grid[row][column - 11] = '*'
+            lst_grid[row][column - 1] = '*'
             lst_grid[row][column] = value
-            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), target_grid))              
+            extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))              
         return extensions
-    
+
+
     def get_space_coor(self):
-        '''
+        '''(self) -> tuple of ints
+        Find the empty space and return a tuple with the coordinate of the empty
+        space on the grid.
         '''
         row_coor = 0
         space_coor = 0
@@ -113,21 +153,26 @@ class MNPuzzle(Puzzle):
         return empty_coor
     
     def convert_to_lst(self, grid):
-        '''
+        '''(self, tuple) -> list
+        Helper Method: Given a grid as tuple then converts to a list.
         '''
         return list(list(row) for row in grid)
 
 
     def convert_to_tuple(self, grid):
-        '''
+        '''(self, list) -> tuple
+        Helper Method: Given a grid as list then converts to a tuple.
         '''
         return tuple(tuple(row) for row in grid)
-    
 
     # TODO
     # override is_solved
     # a configuration is solved when from_grid is the same as to_grid
     def is_solved(self):
+        '''(self) -> bool
+        Return the bool, if the puzzle is solved or not.
+        '''
+        # Check if the from_grid is equal to to_grid
         return self.from_grid == self.to_grid
 
 if __name__ == "__main__":
