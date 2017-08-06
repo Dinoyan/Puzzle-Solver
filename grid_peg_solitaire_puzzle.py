@@ -27,13 +27,8 @@ class GridPegSolitairePuzzle(Puzzle):
     # TODO
     # implement __eq__, __str__ methods
     def __eq__(self, other):
-        row = 0
-        eq_row = 0
-        for row in self._marker:
-            if other[row] != row:
-                eq_row -= 1
-            eq_row += 1
-        return ((len(self._marker) == eq_row) and (self._marker_set == other._marker_set))
+        return (type(other) == type(self) and
+                       self._marker == other._marker and self._marker_set == other._marker_set)      
                 
     def __str__(self):
         pass
