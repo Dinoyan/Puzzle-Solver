@@ -41,8 +41,36 @@ class GridPegSolitairePuzzle(Puzzle):
     # making a single jump from this configuration
     def extensions(self):
         coor = self.get_empty_space()
-        row, col = coor[0], col[1]
-        row_len = len(self._marker[0])
+        row, col = coor[0], coor[1]
+        num_row = len(self._marker)
+        num_sub_r = len(self._marker[0])
+        extensions, markers = [], self._marker_set
+        
+        print('row' + str(row))
+        print('col' + str(col))
+
+        # UP DIRECTION
+        if num_row + 2 <= num_row:
+            grid_copy = deepcopy(self._marker)
+            if (grid_copy[row + 1][col] == '*') and (grid_copy[row + 2][col] == '*'):
+                grid_copy[row][col] = '*'
+                grid_copy[row + 1][col] = '.'
+                grid_copy[row + 2][col] = '.'
+                extensions.append(GridPegSolitairePuzzle(grid_copy, markers))
+
+        # DOWN DIRECTION
+        if num_row - 2 >= 0:
+            grid_copy = deepcopy(self._marker)
+            if (grid_copy[row - 1][col] == '*') and (grid_copy[row - 2][col] == '*'):
+                grid_copy[row][col] = '*'
+                grid_copy[row - 1][col] = '.'
+                grid_copy[row  - 2][col] = '.'
+                extensions.append(GridPegSolitairePuzzle(grid_copy, markers))        
+        
+        # RIGHT DIRECTION
+
+        # LEFT DIRECTION
+        return extensions
         
     
     def get_empty_space(self):
@@ -56,6 +84,7 @@ class GridPegSolitairePuzzle(Puzzle):
             col = 0
             row += 1
         return coor
+
     # TODO
     # override is_solved
     # A configuration is solved when there is exactly one "*" left
