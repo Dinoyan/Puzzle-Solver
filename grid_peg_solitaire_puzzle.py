@@ -1,4 +1,5 @@
 from puzzle import Puzzle
+from copy import deepcopy
 
 
 class GridPegSolitairePuzzle(Puzzle):
@@ -39,14 +40,28 @@ class GridPegSolitairePuzzle(Puzzle):
     # legal extensions consist of all configurations that can be reached by
     # making a single jump from this configuration
     def extensions(self):
-        pass
+        coor = self.get_empty_space()
+        row, col = coor[0], col[1]
+        row_len = len(self._marker[0])
+        
     
-    
+    def get_empty_space(self):
+        row = 0
+        col = 0
+        for grid_row in self._marker:
+            for sub_row in grid_row:
+                if sub_row == ".":
+                    coor = (row, col)
+                col += 1
+            col = 0
+            row += 1
+        return coor
     # TODO
     # override is_solved
     # A configuration is solved when there is exactly one "*" left
     def is_solved(self):
-        ''' Return True if the puzzle is solved, else False
+        '''(self) -> bool
+        Return True if the puzzle is solved, else False
         '''
         # Set is_solved to True.
         is_solved = True
@@ -55,9 +70,10 @@ class GridPegSolitairePuzzle(Puzzle):
         # Loop through the grid.
         for row in self._marker:
             # Check for *.
-            if '*' in row:
-                # Increment the num_peg by 1
-                num_peg += 1
+            for sub_row in row:
+                if sub_row == "*":
+                    # Increment the num_peg by 1
+                    num_peg += 1
         # Check if the num_peg is greater than 1.
         if num_peg > 1:
             # Set is_solved to False.
