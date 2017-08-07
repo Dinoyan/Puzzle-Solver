@@ -44,7 +44,16 @@ class GridPegSolitairePuzzle(Puzzle):
     # making a single jump from this configuration
     def extensions(self):
         '''(self) -> list of puzzle obj
-        
+        Retrun a list with all the legal extensions.
+        >>> g = [['*','*','*','.','*','*']]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> e = gpsp.extensions()
+        >>> print(e[0])
+        ['*', '*', '*', '*', '.', '.']
+        <BLANKLINE>
+        >>> print(e[1])
+        ['*', '.', '.', '*', '*', '*']
+        <BLANKLINE>
         '''
         # Call the get_empty_space method to get the coordinates of the empty
         # spaces.
@@ -83,7 +92,7 @@ class GridPegSolitairePuzzle(Puzzle):
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))      
     
             # RIGHT DIRECTION MOVE
-            if col + 2 <= num_sub_r:
+            if sub_row + 2 <= num_sub_r:
                 temp_puzzle = deepcopy(self._marker)
                 # Check for pegs
                 if (temp_puzzle[row][sub_row + 1] == '*') and (temp_puzzle[row][sub_row + 2] == '*'):
@@ -94,7 +103,7 @@ class GridPegSolitairePuzzle(Puzzle):
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))                    
 
             # LEFT DIRECTION MOVE
-            if col - 2 >= 0:
+            if sub_row - 2 >= 0:
                 temp_puzzle = deepcopy(self._marker)
                 # Check for pegs
                 if (temp_puzzle[row][sub_row - 1] == '*') and (temp_puzzle[row][sub_row - 2] == '*'):
@@ -109,6 +118,15 @@ class GridPegSolitairePuzzle(Puzzle):
     def get_empty_space(self):
         '''(self) -> list of tuples
         Given a puzzle, then returns the coordinates of all the epmty spaces.
+    
+        >>> g = [['.','*','*','*'], ['*','*','*','*'],['*','*','*','*']]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> gpsp.get_empty_space()
+        [(0, 0)]
+        >>> g = [['.','*','*','*'], ['*','.','*','*'],['*','*','*','*']]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> gpsp.get_empty_space()
+        [(0, 0), (1, 1)]
         '''
         # Var for keeping count of the rows/sub_rows.
         row = 0
@@ -136,6 +154,11 @@ class GridPegSolitairePuzzle(Puzzle):
     def is_solved(self):
         '''(self) -> bool
         Return True if the puzzle is solved, else False
+        
+        >>> g = [['*','*','*','.','*','*']]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> gpsp.is_solved()
+        False
         '''
         # Set is_solved to True.
         is_solved = True
