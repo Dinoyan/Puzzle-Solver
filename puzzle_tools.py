@@ -10,6 +10,10 @@ import sys
 #resource.setrlimit(resource.RLIMIT_STACK, (2**29, -1))
 sys.setrecursionlimit(10**6)
 
+# References:
+# http://code.activestate.com/recipes/579138-simple-breadth-first-depth-first-tree-traversal/
+# https://en.wikipedia.org/wiki/Breadth-first_search (Pseudocode)
+# https://stackoverflow.com/questions/26967139/depth-first-search-on-a-binary-tree
 
 # TODO
 # implement depth_first_solve
