@@ -87,17 +87,20 @@ class MNPuzzle(Puzzle):
         ('4', '5', '*')
         <BLANKLINE>
         '''
+        # List to store the extensions.
         extensions = []
+        # Call the get_space_coor method.
         coor = self.get_space_coor()
-        row, column, to_grid = coor[0], coor[1], self.to_grid
+        # Get the row and column ints.
+        row, sub_row, to_grid = coor[0], coor[1], self.to_grid
         # Down move
         if row + 1 <= self.n:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
-            value = lst_grid[row + 1][column]
-            lst_grid[row + 1][column] = '*'
-            lst_grid[row][column] = value
+            value = lst_grid[row + 1][sub_row]
+            lst_grid[row + 1][sub_row] = '*'
+            lst_grid[row][sub_row] = value
             # Create a MNPuzzle instances and append the list
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))    
 
@@ -106,52 +109,56 @@ class MNPuzzle(Puzzle):
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
-            value = lst_grid[row - 1][column]
-            lst_grid[row - 1][column] = '*'
-            lst_grid[row][column] = value
+            value = lst_grid[row - 1][sub_row]
+            lst_grid[row - 1][sub_row] = '*'
+            lst_grid[row][sub_row] = value
             # Create a MNPuzzle instances and append the list
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))                    
 
         # Right Move
-        if column + 1 <= self.m:
+        if sub_row + 1 <= self.m:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
-            value = lst_grid[row][column + 1]
-            lst_grid[row][column + 1] = '*'
-            lst_grid[row][column] = value
+            value = lst_grid[row][sub_row + 1]
+            lst_grid[row][sub_row + 1] = '*'
+            lst_grid[row][sub_row] = value
             # Create a MNPuzzle instances and append the list
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))
 
         # Left move
-        if column - 1 >= 0:
+        if sub_row - 1 >= 0:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
-            value = lst_grid[row][column - 1]
-            lst_grid[row][column - 1] = '*'
-            lst_grid[row][column] = value
+            value = lst_grid[row][sub_row - 1]
+            lst_grid[row][sub_row - 1] = '*'
+            lst_grid[row][sub_row] = value
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))              
         return extensions
-
 
     def get_space_coor(self):
         '''(self) -> tuple of ints
         Find the empty space and return a tuple with the coordinate of the empty
         space on the grid.
         '''
+        # Counter vars.
         row_coor = 0
         space_coor = 0
         # Get the coordinate of the empty space '*'
         for sub_row in self.from_grid:
+            # Loop through the sub row.
             for item in sub_row:
                 if item == '*':
                     # Create a tuple with the coordinates
                     empty_coor = (row_coor, space_coor)
                 space_coor += 1
+            # Increment the counter.
             row_coor += 1
+            # Reset the counter.
             space_coor = 0
+        # Return the coor.
         return empty_coor
-    
+
     def convert_to_lst(self, grid):
         '''(self, tuple) -> list
         Helper Method: Given a grid as tuple then converts to a list.
