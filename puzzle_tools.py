@@ -40,19 +40,17 @@ def depth_first_solve(puzzle):
     # List to keep track of the visited nodes
     visited = []
     while len(stack) != 0:
-        curr = stack.pop()
-        if curr not in visited and not curr.puzzle.fail_fast():
-            visited.append(curr)
-            for ext in curr.puzzle.extensions():
-                stack.append(PuzzleNode(ext, ext.extensions(), curr))
-            if curr.puzzle.is_solved():
-                    sol_node = PuzzleNode(curr.puzzle)        
+        temp = stack.pop()
+        if temp not in visited and not temp.puzzle.fail_fast():
+            visited.append(temp)
+            for ext in temp.puzzle.extensions():
+                stack.append(PuzzleNode(ext, ext.extensions(), temp))
+            if temp.puzzle.is_solved():
+                    sol_node = temp
+                    return sol_node
+    # Retrun None if there is no solution to the puzzle
     return None
 
-def get_path():
-    pass
-            
-            
 
 # TODO
 # implement breadth_first_solve
@@ -70,23 +68,28 @@ def breadth_first_solve(puzzle):
     @type puzzle: Puzzle
     @rtype: PuzzleNode
     """
-    # Used as a stack
+    # BFS and DFS looks the same, the only difference is BFS uses a queue. And
+    # DFS uses a stack.
+    # Call the deque functions
     q = deque()
-    # Append the puzzle to the list.
+    # Append the puzzle to the queue.
     q.append(PuzzleNode(puzzle, puzzle.extensions()))
     # List to keep track of the visited nodes
     visited = []
     while len(q) != 0:
-        curr = q.popleft()
-        if curr not in visited and not curr.puzzle.fail_fast():
-            visited.append(curr)
-            for ext in curr.puzzle.extensions():
-                q.append(PuzzleNode(ext, ext.extensions(), curr))
-            if curr.puzzle.is_solved():
-                    sol_node = PuzzleNode(curr.puzzle)
+        temp = q.popleft()
+        if temp not in visited and not temp.puzzle.fail_fast():
+            visited.append(temp)
+            for ext in temp.puzzle.extensions():
+                q.append(PuzzleNode(ext, ext.extensions(), temp))
+            if temp.puzzle.is_solved():
+                    sol_node = temp
                     return sol_node
+    # Retrun None if there is no solution to the puzzle
     return None    
 
+def get_path(t, soln_node):
+    pass
 
 
 # Class PuzzleNode helps build trees of PuzzleNodes that have

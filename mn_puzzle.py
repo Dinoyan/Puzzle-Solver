@@ -55,7 +55,6 @@ class MNPuzzle(Puzzle):
         Returns a list with all the legal extensions. Legal extensions are confi
         gurations that can be reached by swapping one  symbol to the left,
         right, above, or below "*" with "*"
-
         >>> start_grid = (("2", "*", "3"), ("1", "4", "5"))
         >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
         >>> a = MNPuzzle(start_grid, target_grid)
@@ -68,7 +67,6 @@ class MNPuzzle(Puzzle):
         ('1', '2', '3')
         ('4', '5', '*')
         <BLANKLINE>
-
         >>> print(l[2])
         From Grid:
         ('*', '2', '3')
@@ -77,7 +75,6 @@ class MNPuzzle(Puzzle):
         ('1', '2', '3')
         ('4', '5', '*')
         <BLANKLINE>
-
         >>> print(l[1])
         From Grid:
         ('2', '3', '*')
@@ -94,7 +91,7 @@ class MNPuzzle(Puzzle):
         # Get the row and column ints.
         row, sub_row, to_grid = coor[0], coor[1], self.to_grid
         # Down move
-        if row + 1 <= self.n:
+        if row + 1 < self.n:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
@@ -105,7 +102,7 @@ class MNPuzzle(Puzzle):
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))    
 
         # Up move
-        if row + 1 > self.n:
+        if row - 1 >= 0:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
@@ -116,7 +113,7 @@ class MNPuzzle(Puzzle):
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))                    
 
         # Right Move
-        if sub_row + 1 <= self.m:
+        if sub_row + 1 < self.m:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
             # Make the moves
@@ -134,7 +131,7 @@ class MNPuzzle(Puzzle):
             lst_grid[row][sub_row - 1] = '*'
             lst_grid[row][sub_row] = value
             extensions.append(MNPuzzle(self.convert_to_tuple(lst_grid), to_grid))              
-        return extensions
+        return extensions  
 
     def get_space_coor(self):
         '''(self) -> tuple of ints
@@ -189,12 +186,12 @@ if __name__ == "__main__":
     start_grid = (("*", "2", "3"), ("1", "4", "5"))
     from puzzle_tools import breadth_first_solve, depth_first_solve
     from time import time
+
     start = time()
     solution = breadth_first_solve(MNPuzzle(start_grid, target_grid))
-    
+
     # __str__ method tester
     print(MNPuzzle(start_grid, target_grid))
-    
     
     end = time()
     print("BFS solved: \n\n{} \n\nin {} seconds".format(

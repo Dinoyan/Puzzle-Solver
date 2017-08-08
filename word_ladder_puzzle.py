@@ -41,6 +41,11 @@ class WordLadderPuzzle(Puzzle):
                 other._to_word) and (self._word_set == other._word_set))
     
     def __str__(self):
+        '''
+        >>> wlp = WordLadderPuzzle('csc', 'mat', set('dino'))
+        >>> print(wlp)
+        From Word: csc to_word: mat
+        '''
         ret = 'From Word: ' + str(self._from_word) + ' to_word: ' + str(self._to_word)
         return ret
 
