@@ -14,8 +14,10 @@ sys.setrecursionlimit(10**6)
 # Uused for BFS
 # http://code.activestate.com/recipes/579138-simple-breadth-first-depth-first-tree-traversal/
 # https://en.wikipedia.org/wiki/Breadth-first_search (Pseudocode)
+# https://stackoverflow.com/questions/713508/find-the-paths-between-two-given-nodes
 # Used for DFS:
 # https://stackoverflow.com/questions/26967139/depth-first-search-on-a-binary-tree
+#https://stackoverflow.com/questions/21508765/how-to-implement-depth-first-search-for-graph-with-non-recursive-aprroach
 
 # TODO
 # implement depth_first_solve
@@ -34,9 +36,23 @@ def depth_first_solve(puzzle):
     # Used as a stack
     stack = []
     # Append the puzzle to the list.
-    stack.append(puzzle)
+    stack.append(PuzzleNode(puzzle, puzzle.extensions()))
+    # List to keep track of the visited nodes
+    visited = []
     while len(stack) != 0:
-        pass
+        curr = stack.pop()
+        if curr not in visited and not curr.puzzle.fail_fast():
+            visited.append(curr)
+            for ext in curr.puzzle.extensions():
+                stack.append(PuzzleNode(ext, ext.extensions(), curr))
+            if curr.puzzle.is_solved():
+                    sol_node = PuzzleNode(curr.puzzle)        
+    return None
+
+def get_path():
+    pass
+            
+            
 
 # TODO
 # implement breadth_first_solve
@@ -54,6 +70,23 @@ def breadth_first_solve(puzzle):
     @type puzzle: Puzzle
     @rtype: PuzzleNode
     """
+    # Used as a stack
+    q = deque()
+    # Append the puzzle to the list.
+    q.append(PuzzleNode(puzzle, puzzle.extensions()))
+    # List to keep track of the visited nodes
+    visited = []
+    while len(q) != 0:
+        curr = q.popleft()
+        if curr not in visited and not curr.puzzle.fail_fast():
+            visited.append(curr)
+            for ext in curr.puzzle.extensions():
+                q.append(PuzzleNode(ext, ext.extensions(), curr))
+            if curr.puzzle.is_solved():
+                    sol_node = PuzzleNode(curr.puzzle)
+                    return sol_node
+    return None    
+
 
 
 # Class PuzzleNode helps build trees of PuzzleNodes that have
