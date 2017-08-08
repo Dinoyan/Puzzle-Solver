@@ -288,7 +288,7 @@ if __name__ == "__main__":
                       ["8", "*", "*", "*", "7", "*", "4", "*", "*"],
                       ["*", "6", "*", "3", "*", "2", "*", "*", "*"]],
                      {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
-'''
+
     from time import time
 
     print("solving sudoku from July 9 2015 Star... \n\n{}\n\n".format(s))
@@ -352,5 +352,3 @@ if __name__ == "__main__":
     print("time to solve 9x9 using depth_first: {} seconds\n".format(
         end - start))
     print(sol)
-    
-'''
