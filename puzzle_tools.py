@@ -11,8 +11,10 @@ import sys
 sys.setrecursionlimit(10**6)
 
 # References:
+# Uused for BFS
 # http://code.activestate.com/recipes/579138-simple-breadth-first-depth-first-tree-traversal/
 # https://en.wikipedia.org/wiki/Breadth-first_search (Pseudocode)
+# Used for DFS:
 # https://stackoverflow.com/questions/26967139/depth-first-search-on-a-binary-tree
 
 # TODO
@@ -29,7 +31,12 @@ def depth_first_solve(puzzle):
     @type puzzle: Puzzle
     @rtype: PuzzleNode
     """
-
+    # Used as a stack
+    stack = []
+    # Append the puzzle to the list.
+    stack.append(puzzle)
+    while len(stack) != 0:
+        pass
 
 # TODO
 # implement breadth_first_solve
