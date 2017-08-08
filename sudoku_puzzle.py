@@ -182,7 +182,7 @@ class SudokuPuzzle(Puzzle):
                                           symbols[r+1:], symbol_set)
                 return_lst.append(new_puzzle)
             return return_lst
-        
+
     # TODO
     # override fail_fast
     # Notice that it is not possible to complete a sudoku puzzle if there

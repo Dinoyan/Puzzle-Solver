@@ -76,9 +76,9 @@ class GridPegSolitairePuzzle(Puzzle):
                 # Check for pegs
                 if (temp_puzzle[row + 1][sub_row] == '*') and (temp_puzzle[row + 2][sub_row] == '*'):
                     # Make the move by swapping the symbols.
-                    temp_puzzle[row][sub_row] = '*'
                     temp_puzzle[row + 1][sub_row] = '.'
                     temp_puzzle[row + 2][sub_row] = '.'
+                    temp_puzzle[row][sub_row] = '*'
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))
 
             # DOWN DIRECTION MOVE
@@ -86,9 +86,9 @@ class GridPegSolitairePuzzle(Puzzle):
                 temp_puzzle = deepcopy(self._marker)
                 if (temp_puzzle[row - 1][sub_row] == '*') and (temp_puzzle[row - 2][sub_row] == '*'):
                     # Make the move by swapping the symbols.
-                    temp_puzzle[row][sub_row] = '*'
                     temp_puzzle[row - 1][sub_row] = '.'
                     temp_puzzle[row  - 2][sub_row] = '.'
+                    temp_puzzle[row][sub_row] = '*'
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))      
     
             # RIGHT DIRECTION MOVE
@@ -97,9 +97,9 @@ class GridPegSolitairePuzzle(Puzzle):
                 # Check for pegs
                 if (temp_puzzle[row][sub_row + 1] == '*') and (temp_puzzle[row][sub_row + 2] == '*'):
                     # Make the move by swapping the symbols.
-                    temp_puzzle[row][sub_row] = '*'
                     temp_puzzle[row][sub_row + 2] = '.'
                     temp_puzzle[row][sub_row + 1] = '.'
+                    temp_puzzle[row][sub_row] = '*'
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))                    
 
             # LEFT DIRECTION MOVE
@@ -108,9 +108,9 @@ class GridPegSolitairePuzzle(Puzzle):
                 # Check for pegs
                 if (temp_puzzle[row][sub_row - 1] == '*') and (temp_puzzle[row][sub_row - 2] == '*'):
                     # Make the move by swapping the symbols.
-                    temp_puzzle[row][sub_row] = '*'
                     temp_puzzle[row][sub_row - 2] = '.'
                     temp_puzzle[row][sub_row - 1] = '.'
+                    temp_puzzle[row][sub_row] = '*'
                     extensions.append(GridPegSolitairePuzzle(temp_puzzle, markers))
         # Return the list of all the possible extensions.
         return extensions
