@@ -213,19 +213,21 @@ class SudokuPuzzle(Puzzle):
         """
         symbols, symbol_set, n = self._symbols, self._symbol_set, self._n
         r = 0 # row with first empty position
-        while "*" not in symbols[r]:
+        c = 0
+        for row in symbols:
+            for column in row:
+                if symbols[r][c] == '*':
+                    used_symbols = (self._row_set(r) |
+                              self._column_set(c) |
+                              self._subsquare_set(r, c))
+                    if symbol_set.issubset(used_symbols):
+                        return True
+                c += 1
             r += 1
-        c = symbols[r].index("*") # column with first empty position
-       
-        set_union = (self._symbol_set |
-                           (self._row_set(r) |
-                            self._column_set(c) |
-                            self._subsquare_set(r, c)))
-        print(set_union)
-        if symbol_set.issubset(set_union):            
-            return True
-        else:
-            return False
+            c = 0
+        return False
+
+
     # some helper methods
     def _row_set(self, r):
         #
@@ -286,8 +288,6 @@ if __name__ == "__main__":
                       ["8", "*", "*", "*", "7", "*", "4", "*", "*"],
                       ["*", "6", "*", "3", "*", "2", "*", "*", "*"]],
                      {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
-    
-    print(s.fail_fast())
 '''
     from time import time
 
