@@ -28,13 +28,42 @@ class MNPuzzle(Puzzle):
     # TODO
     # implement __eq__ and __str__
     def __eq__(self, other):
+        '''(self, MNPuzzle) -> bool
+        Return True if both of the puzzle are exact same or else False.
+        >>> start_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> p1 = MNPuzzle(start_grid, target_grid)
+        >>> p2 = MNPuzzle(start_grid, target_grid)
+        >>> p1 == p2
+        True
+        >>> start_grid = (("1", "2", "3"), ("4", "*", "5"))
+        >>> start_grid2 = (("1", "2", "3"), ("4", "5", "*"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> p1 = MNPuzzle(start_grid, target_grid)
+        >>> p2 = MNPuzzle(start_grid2, target_grid)
+        >>> p1 == p2
+        False
+        '''
+        # Check all the class attributes and class type.
         return (type(other) == type(self) and
                        self.n == other.n and self.m == other.m and
-                       self.from_grid == other.to_grid)        
+                       self.to_grid == other.to_grid and self.from_grid ==
+                       other.from_grid)
             
     def __str__(self):
         '''(self) -> str
-        Returns the 
+        Returns the string representation of the puzzle
+        >>> start_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> a = MNPuzzle(start_grid, target_grid)
+        >>> print(a)
+        From Grid:
+        ('1', '2', '3')
+        ('4', '5', '*')
+        To Grid
+        ('1', '2', '3')
+        ('4', '5', '*')
+        <BLANKLINE>
         '''
         from_grid = ''
         for row in self.from_grid:
@@ -135,8 +164,13 @@ class MNPuzzle(Puzzle):
 
     def get_space_coor(self):
         '''(self) -> tuple of ints
-        Find the empty space and return a tuple with the coordinate of the empty
-        space on the grid.
+        Find the empty space from the start grid and return a tuple with the
+        coordinate of the emptyspace on the grid.(row, sub_row)
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> start_grid = (("*", "2", "3"), ("1", "4", "5"))
+        >>> a = MNPuzzle(start_grid, target_grid)
+        >>> a.get_space_coor()
+        (0, 0)
         '''
         # Counter vars.
         row_coor = 0
@@ -175,6 +209,16 @@ class MNPuzzle(Puzzle):
     def is_solved(self):
         '''(self) -> bool
         Return the bool, if the puzzle is solved or not.
+        >>> start_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> a = MNPuzzle(start_grid, target_grid)
+        >>> a.is_solved()
+        True
+        >>> start_grid = (("*", "2", "3"), ("1", "4", "5"))
+        >>> target_grid = (("1", "2", "3"), ("4", "5", "*"))
+        >>> a = MNPuzzle(start_grid, target_grid)
+        >>> a.is_solved()
+        False
         '''
         # Check if the from_grid is equal to to_grid
         return self.from_grid == self.to_grid
@@ -186,7 +230,7 @@ if __name__ == "__main__":
     start_grid = (("*", "2", "3"), ("1", "4", "5"))
     from puzzle_tools import breadth_first_solve, depth_first_solve
     from time import time
-
+'''
     start = time()
     solution = breadth_first_solve(MNPuzzle(start_grid, target_grid))
 
@@ -200,4 +244,4 @@ if __name__ == "__main__":
     solution = depth_first_solve((MNPuzzle(start_grid, target_grid)))
     end = time()
     print("DFS solved: \n\n{} \n\nin {} seconds".format(
-        solution, end - start))
+        solution, end - start))'''

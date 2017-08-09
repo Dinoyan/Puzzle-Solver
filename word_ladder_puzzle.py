@@ -37,11 +37,13 @@ class WordLadderPuzzle(Puzzle):
         >>> wlp1 == wlp2
         False
         '''
+        # Check all the class attributes and class type.
         return ((self._from_word == other._from_word) and (self._to_word == 
                 other._to_word) and (self._word_set == other._word_set))
     
     def __str__(self):
-        '''
+        '''(self) -> str
+        Returns the string representation of the puzzle
         >>> wlp = WordLadderPuzzle('csc', 'mat', set('dino'))
         >>> print(wlp)
         From Word: csc to_word: mat
@@ -62,6 +64,19 @@ class WordLadderPuzzle(Puzzle):
         From Word: bat to_word: bat
         >>> print(e[1])
         From Word: cat to_word: bat
+        >>> s = ('wino', 'dine', 'ding', 'dins', 'dint')
+        >>> wlp = WordLadderPuzzle("dino", "type", s)
+        >>> l = wlp.extensions()
+        >>> print(l[0])
+        From Word: wino to_word: type
+        >>> print(l[1])
+        From Word: dine to_word: type
+        >>> print(l[2])
+        From Word: ding to_word: type
+        >>> print(l[3])
+        From Word: dins to_word: type
+        >>> print(l[4])
+        From Word: dint to_word: type
         '''
         # Create an empty list to store the extensions.
         extensions_lst = []
@@ -109,6 +124,8 @@ if __name__ == '__main__':
     with codecs.open("words", "r", 'utf-8') as words:
         word_set = set(words.read().split())
     w = WordLadderPuzzle("same", "cost", word_set)
+
+    '''
     start = time()
     sol = breadth_first_solve(w)
     end = time()
@@ -121,3 +138,4 @@ if __name__ == '__main__':
     print("Solving word ladder from same->cost")
     print("...using depth-first-search")
     print("Solutions: {} took {} seconds.".format(sol, end - start))
+'''

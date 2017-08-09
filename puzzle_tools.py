@@ -48,8 +48,12 @@ def depth_first_solve(puzzle):
             if temp.puzzle.is_solved():
                     sol_node = temp
                     return sol_node
+    
+    while sol_node.parent:
+        sol_node = sol_node.parent
+        sol_node.children = [node]        
     # Retrun None if there is no solution to the puzzle
-    return None
+    return sol_node
 
 
 # TODO

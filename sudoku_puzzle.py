@@ -316,6 +316,8 @@ if __name__ == "__main__":
                       ["*", "4", "5", "*", "*", "*", "8", "1", "*"],
                       ["*", "*", "*", "3", "*", "6", "*", "*", "*"]],
                      {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
+    
+    '''
 
     print("solving 3-star sudoku from \"That's Puzzling\","
           "November 14th 2015\n\n{}\n\n".format(s))
@@ -352,3 +354,4 @@ if __name__ == "__main__":
     print("time to solve 9x9 using depth_first: {} seconds\n".format(
         end - start))
     print(sol)
+'''

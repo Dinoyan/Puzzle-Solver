@@ -28,13 +28,23 @@ class GridPegSolitairePuzzle(Puzzle):
     # TODO
     # implement __eq__, __str__ methods
     def __eq__(self, other):
+        '''(self, GridPegSolitairePuzzle) -> bool
+        Return True if both of the puzzle are exact same or else False.
+        '''
+        # Check all the class attributes and class type.
         return (type(other) == type(self) and
                        (self._marker == other._marker) and (self._marker_set == other._marker_set))      
                 
     def __str__(self):
+        '''(self) -> str
+        Returns the string representation of the puzzle
+        '''
+        # Var to store the string
         ret = ''
+        # Loop through the rows.
         for row in self._marker:
             ret += str(row) + '\n'
+        # Return the string rep
         return ret
     # __repr__ is up to you
 
@@ -53,6 +63,27 @@ class GridPegSolitairePuzzle(Puzzle):
         <BLANKLINE>
         >>> print(e[1])
         ['*', '.', '.', '*', '*', '*']
+        <BLANKLINE>
+        >>> g = [[".", ".", ".", ".", "."],\
+            [".", "*", "*", ".", "."],\
+            [".", ".", ".", ".", "."],\
+            [".", ".", ".", ".", "."],\
+            [".", ".", ".", ".", "."]]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> lst = gpsp.extensions()
+        >>> print(lst[0])
+        ['.', '.', '.', '.', '.']
+        ['*', '.', '.', '.', '.']
+        ['.', '.', '.', '.', '.']
+        ['.', '.', '.', '.', '.']
+        ['.', '.', '.', '.', '.']
+        <BLANKLINE>
+        >>> print(lst[1])
+        ['.', '.', '.', '.', '.']
+        ['.', '.', '.', '*', '.']
+        ['.', '.', '.', '.', '.']
+        ['.', '.', '.', '.', '.']
+        ['.', '.', '.', '.', '.']
         <BLANKLINE>
         '''
         # Call the get_empty_space method to get the coordinates of the empty
@@ -159,6 +190,14 @@ class GridPegSolitairePuzzle(Puzzle):
         >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
         >>> gpsp.is_solved()
         False
+        >>> g = [[".", ".", ".", ".", "."],\
+            [".", "*", ".", ".", "."],\
+            [".", ".", ".", ".", "."],\
+            [".", ".", ".", ".", "."],\
+            [".", ".", ".", ".", "."]]
+        >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
+        >>> gpsp.is_solved()
+        True
         '''
         # Set is_solved to True.
         is_solved = True
@@ -173,6 +212,7 @@ class GridPegSolitairePuzzle(Puzzle):
                     num_peg += 1
         # Check if the num_peg is greater than 1.
         if num_peg > 1:
+            # There are more than 1 peg left on the grid.
             # Set is_solved to False.
             is_solved = False
         # Return is_solved bool. 
@@ -192,9 +232,9 @@ if __name__ == "__main__":
             ["*", "*", "*", "*", "*"]]
     gpsp = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
     import time
-
+'''
     start = time.time()
     solution = depth_first_solve(gpsp)
     end = time.time()
     print("Solved 5x5 peg solitaire in {} seconds.".format(end - start))
-    print("Using depth-first: \n{}".format(solution))
+    print("Using depth-first: \n{}".format(solution))'''
