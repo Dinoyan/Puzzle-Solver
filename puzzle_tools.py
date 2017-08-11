@@ -19,6 +19,8 @@ sys.setrecursionlimit(10**6)
 # https://stackoverflow.com/questions/26967139/depth-first-search-on-a-binary-tree
 #https://stackoverflow.com/questions/21508765/how-to-implement-depth-first-search-for-graph-with-non-recursive-aprroach
 
+# Used the pseudo code from wiki to implement DFS and BFS.
+
 # TODO
 # implement depth_first_solve
 # do NOT change the type contract
@@ -39,21 +41,22 @@ def depth_first_solve(puzzle):
     stack.append(PuzzleNode(puzzle, puzzle.extensions()))
     # List to keep track of the visited nodes
     visited = []
+     # Loop till the stack is empty.
     while len(stack) != 0:
+        # Pop the item from the stack.
         temp = stack.pop()
+        # Chck if the current puzzle is seen before or its unsolvable.
         if temp not in visited and not temp.puzzle.fail_fast():
+            # Append the puzzle to the visited list.
             visited.append(temp)
+            # Loop thorugh the extensions.
             for ext in temp.puzzle.extensions():
                 stack.append(PuzzleNode(ext, ext.extensions(), temp))
             if temp.puzzle.is_solved():
-                    sol_node = temp
-                    return sol_node
-    
-    while sol_node.parent:
-        sol_node = sol_node.parent
-        sol_node.children = [node]        
+                # Current temp node is the solution.
+                return temp
     # Retrun None if there is no solution to the puzzle
-    return sol_node
+    return None
 
 
 # TODO
@@ -74,26 +77,31 @@ def breadth_first_solve(puzzle):
     """
     # BFS and DFS looks the same, the only difference is BFS uses a queue. And
     # DFS uses a stack.
+    # Got that from stackoverflow ^^
+
     # Call the deque functions
     q = deque()
     # Append the puzzle to the queue.
     q.append(PuzzleNode(puzzle, puzzle.extensions()))
     # List to keep track of the visited nodes
     visited = []
+    # Loop till the queue is empty.
     while len(q) != 0:
+        # Pop the item from the queue.
         temp = q.popleft()
+        # Chck if the current puzzle is seen before or its unsolvable.
         if temp not in visited and not temp.puzzle.fail_fast():
+            # Append the puzzle to the visited list.
             visited.append(temp)
+            # Loop thorugh the extensions.
             for ext in temp.puzzle.extensions():
+                # Make tree node and append to the queue.
                 q.append(PuzzleNode(ext, ext.extensions(), temp))
             if temp.puzzle.is_solved():
-                    sol_node = temp
-                    return sol_node
+                # Current temp node is the solution.
+                return temp
     # Retrun None if there is no solution to the puzzle
-    return None    
-
-def get_path(t, soln_node):
-    pass
+    return None
 
 
 # Class PuzzleNode helps build trees of PuzzleNodes that have

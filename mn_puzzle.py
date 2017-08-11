@@ -230,7 +230,7 @@ if __name__ == "__main__":
     start_grid = (("*", "2", "3"), ("1", "4", "5"))
     from puzzle_tools import breadth_first_solve, depth_first_solve
     from time import time
-'''
+
     start = time()
     solution = breadth_first_solve(MNPuzzle(start_grid, target_grid))
 
@@ -244,4 +244,4 @@ if __name__ == "__main__":
     solution = depth_first_solve((MNPuzzle(start_grid, target_grid)))
     end = time()
     print("DFS solved: \n\n{} \n\nin {} seconds".format(
-        solution, end - start))'''
+        solution, end - start))

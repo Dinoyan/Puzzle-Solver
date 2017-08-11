@@ -40,7 +40,7 @@ class WordLadderPuzzle(Puzzle):
         # Check all the class attributes and class type.
         return ((self._from_word == other._from_word) and (self._to_word == 
                 other._to_word) and (self._word_set == other._word_set))
-    
+
     def __str__(self):
         '''(self) -> str
         Returns the string representation of the puzzle
@@ -125,7 +125,6 @@ if __name__ == '__main__':
         word_set = set(words.read().split())
     w = WordLadderPuzzle("same", "cost", word_set)
 
-    '''
     start = time()
     sol = breadth_first_solve(w)
     end = time()
@@ -138,4 +137,3 @@ if __name__ == '__main__':
     print("Solving word ladder from same->cost")
     print("...using depth-first-search")
     print("Solutions: {} took {} seconds.".format(sol, end - start))
-'''

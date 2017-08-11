@@ -30,6 +30,21 @@ class GridPegSolitairePuzzle(Puzzle):
     def __eq__(self, other):
         '''(self, GridPegSolitairePuzzle) -> bool
         Return True if both of the puzzle are exact same or else False.
+        >>> grid = [["*", "*", "*", "*", "*"],\
+            ["*", "*", "*", "*", "*"],\
+            ["*", "*", "*", "*", "*"],\
+            ["*", "*", ".", "*", "*"],\
+            ["*", "*", "*", "*", "*"]]
+        >>> gpsp = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
+        >>> gpsp2 = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
+        >>> gpsp == gpsp2
+        True
+        >>> grid = [['*','*','*','.','*','*']]
+        >>> grid2 = [[]]
+        >>> gpsp2 = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
+        >>> gpsp = GridPegSolitairePuzzle(grid2, {"*", ".", "#"})
+        >>> gpsp == gpsp2
+        False
         '''
         # Check all the class attributes and class type.
         return (type(other) == type(self) and
@@ -38,6 +53,19 @@ class GridPegSolitairePuzzle(Puzzle):
     def __str__(self):
         '''(self) -> str
         Returns the string representation of the puzzle
+        >>> grid = [["*", "*", "*", "*", "*"],\
+            ["*", "*", "*", "*", "*"],\
+            ["*", "*", "*", "*", "*"],\
+            ["*", "*", ".", "*", "*"],\
+            ["*", "*", "*", "*", "*"]]
+        >>> gpsp = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
+        >>> print(gpsp)
+        ['*', '*', '*', '*', '*']
+        ['*', '*', '*', '*', '*']
+        ['*', '*', '*', '*', '*']
+        ['*', '*', '.', '*', '*']
+        ['*', '*', '*', '*', '*']
+        <BLANKLINE>
         '''
         # Var to store the string
         ret = ''
@@ -185,7 +213,7 @@ class GridPegSolitairePuzzle(Puzzle):
     def is_solved(self):
         '''(self) -> bool
         Return True if the puzzle is solved, else False
-        
+
         >>> g = [['*','*','*','.','*','*']]
         >>> gpsp = GridPegSolitairePuzzle(g, {"*", ".", "#"})
         >>> gpsp.is_solved()
@@ -232,9 +260,9 @@ if __name__ == "__main__":
             ["*", "*", "*", "*", "*"]]
     gpsp = GridPegSolitairePuzzle(grid, {"*", ".", "#"})
     import time
-'''
+
     start = time.time()
     solution = depth_first_solve(gpsp)
     end = time.time()
     print("Solved 5x5 peg solitaire in {} seconds.".format(end - start))
-    print("Using depth-first: \n{}".format(solution))'''
+    print("Using depth-first: \n{}".format(solution))
