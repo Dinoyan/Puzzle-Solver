@@ -65,12 +65,15 @@ class MNPuzzle(Puzzle):
         ('4', '5', '*')
         <BLANKLINE>
         '''
+        # Var to store the string
         from_grid = ''
+        # Loop through the from grid and start grid row by row.
         for row in self.from_grid:
             from_grid += str(row) + '\n'
         to_grid = ''
         for row in self.to_grid:
             to_grid += str(row)  + '\n'
+        # Return the string rep.
         return "From Grid:" + '\n' + from_grid + 'To Grid' + '\n' + to_grid
         
     # __repr__ is up to you
@@ -123,7 +126,7 @@ class MNPuzzle(Puzzle):
         if row + 1 < self.n:
             grid_copy = deepcopy(self.from_grid)
             lst_grid = self.convert_to_lst(grid_copy)
-            # Make the moves
+            # Make the moves by swapping the symbols.
             value = lst_grid[row + 1][sub_row]
             lst_grid[row + 1][sub_row] = '*'
             lst_grid[row][sub_row] = value

@@ -211,20 +211,30 @@ class SudokuPuzzle(Puzzle):
         >>> s.fail_fast()
         True
         """
+        # method var.
         symbols, symbol_set, n = self._symbols, self._symbol_set, self._n
-        r = 0 # row with first empty position
+        # Counter vars
+        r = 0 
         c = 0
+        # Loop through the symbols.
         for row in symbols:
+            # Loop through the subrows
             for column in row:
+                # Check for empty space
                 if symbols[r][c] == '*':
+                    # Get the symbols at the current coor.
                     used_symbols = (self._row_set(r) |
                               self._column_set(c) |
                               self._subsquare_set(r, c))
+                    # Check if all the symbols are used or not.
                     if symbol_set.issubset(used_symbols):
+                        # Return True
                         return True
+                # Increment the counters/reset
                 c += 1
             r += 1
             c = 0
+        # Return False.
         return False
 
 

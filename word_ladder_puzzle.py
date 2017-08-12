@@ -49,6 +49,7 @@ class WordLadderPuzzle(Puzzle):
         From Word: csc to_word: mat
         '''
         ret = 'From Word: ' + str(self._from_word) + ' to_word: ' + str(self._to_word)
+        # Return the string.
         return ret
 
     # TODO
